@@ -93,7 +93,7 @@ docker-compose run --rm app sh -c "flake8"
 ## Testing
 
 ```
-docker-compose run --rm app sh -c "python manage.py test"
+python manage.py test
 ```
 
 ## Creating Project
@@ -101,3 +101,71 @@ docker-compose run --rm app sh -c "python manage.py test"
 ```
 django-admin startproject app .
 ```
+
+## Test classes
+
+* SimpleTestCase
+    * No database integration
+    * Useful if no database is required for your test
+    * Save time executing tests
+
+* TestCase
+    * Database integration
+    * Useful for testing code that uses the database
+
+## Mocking
+
+* Override or change behaviour of dependencies
+* Avoid unintended side effects
+* Isolate code being tested
+
+### Why use mocking?
+
+* Avoid relying on external services
+    * Can't guarantee they will be available
+    * Makes tests unpredictable and inconsistent
+
+* Avoid unintended consequences
+    * Accidentally sending emails
+    * Overloading external services
+
+Example:
+
+```
+register_user()
+create_in_db()
+send_welcome_email()
+```
+
+* Prevent email being send
+* Ensure `send_welcome_email()` called correctly
+
+### How to mock code?
+
+* Use `unittest.mock`
+    * `MagicMock/Mock` - Replace real objects
+    * `patch` - Overrides code for tests
+
+
+# Testing Web Requests
+
+## Testing APIs
+
+* Make actual requests
+* Check result
+
+## Django REST framework APIClient
+
+* Based on the Django's TestClient
+* Make requests
+* Check result
+* Override authentication
+
+## Using the APIClient
+
+* Import `APIClient`
+* Create client
+* Make request
+* Check result
+
+ 
