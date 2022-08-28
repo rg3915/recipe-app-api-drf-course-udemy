@@ -4,7 +4,7 @@ LABEL maintainer="rg3915"
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
-# COPY ./requirements.dev.txt /tmp/requirements.dev.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 # COPY ./scripts /scripts
 # COPY ./app /app
 WORKDIR /app
