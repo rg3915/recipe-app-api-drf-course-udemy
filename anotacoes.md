@@ -99,5 +99,5 @@ docker-compose run --rm app sh -c "python manage.py test"
 ## Creating Project
 
 ```
-docker-compose run --rm app sh -c "django-admin startproject app ."
+django-admin startproject app .
 ```

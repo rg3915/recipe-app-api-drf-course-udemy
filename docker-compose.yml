@@ -1,38 +1,41 @@
-version: "3.9"
+version: "3.8"
 
 services:
-  app:
-    build:
-      context: .
-      args:
-        - DEV=true
-    ports:
-      - "8000:8000"
-    volumes:
-      - ./app:/app
-      - dev-static-data:/vol/web
-    command: >
-      sh -c "python manage.py wait_for_db &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
-    environment:
-      - DB_HOST=db
-      - DB_NAME=devdb
-      - DB_USER=devuser
-      - DB_PASS=changeme
-      - DEBUG=1
-    depends_on:
-      - db
-
-  db:
+  database:
+    container_name: db
     image: postgres:14-alpine
+    restart: always
+    user: postgres  # importante definir o usuário
     volumes:
-      - dev-db-data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=devdb
-      - POSTGRES_USER=devuser
-      - POSTGRES_PASSWORD=changeme
+      - LC_ALL=C.UTF-8
+      - POSTGRES_PASSWORD=postgres  # senha padrão
+      - POSTGRES_USER=postgres  # usuário padrão
+      - POSTGRES_DB=db  # necessário porque foi configurado assim no settings
+    ports:
+      - 5438:5432  # repare na porta externa 5438
+    networks:
+      - recipe-app-api
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    volumes:
+       - pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - 5058:80
+    networks:
+      - recipe-app-api
 
 volumes:
-  dev-db-data:
-  dev-static-data:
+  pgdata:  # mesmo nome do volume externo definido na linha 10
+  pgadmin:
+
+networks:
+  recipe-app-api:

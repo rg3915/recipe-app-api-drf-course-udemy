@@ -13,10 +13,10 @@ SECRET_KEY=%s
 ALLOWED_HOSTS=127.0.0.1,.localhost,0.0.0.0
 
 #DATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/NAME
-DB_HOST=db
-POSTGRES_DB=devdb
-POSTGRES_USER=devuser
-POSTGRES_PASSWORD=changeme
+POSTGRES_DB=db
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST=localhost
 
 #DEFAULT_FROM_EMAIL=
 #EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
