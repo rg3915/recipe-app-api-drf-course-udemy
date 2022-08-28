@@ -1,5 +1,7 @@
 # API features:
 
+https://github.com/LondonAppDeveloper/c2-recipe-app-api-2
+
 * User Authentication
 * Creating objects
 * Filtering & sorting objects
@@ -78,4 +80,5 @@
 
 Authenticate with Docker Hub
 
+On Github repository, click Settings > Secrets > Actions and click on **New repository secret**
 

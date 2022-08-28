@@ -4,7 +4,7 @@ Curso de DRF with TDD - Build a Backend REST API with Python &amp; Django - Adva
 
 ## Este projeto foi feito com:
 
-* [Python 3.10.4](https://www.python.org/)
+* [Python 3.10.6 (on Docker)](https://www.python.org/)
 * [Django 4.1](https://www.djangoproject.com/)
 * [Django Rest Framework 3.13.1](https://www.django-rest-framework.org/)
 
@@ -30,3 +30,6 @@ python manage.py migrate
 python manage.py createsuperuser --username="admin" --email=""
 ```
 
+## Links
+
+https://github.com/LondonAppDeveloper/c2-recipe-app-api-2
