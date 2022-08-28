@@ -168,4 +168,20 @@ send_welcome_email()
 * Make request
 * Check result
 
- 
+## Common testing problems
+
+### Common Issues
+
+* Tests not running
+* Ran less tests than you have
+
+Possible reasons for tests not running
+
+* Missing `__init__.py` in `tests/` dir
+* Indentation of test cases
+* Missing `test` prefix for method
+* `ImportError` when running tests
+
+Possible reason for ImportError
+
+* Both `tests/` directory and `tests.py` exist.
