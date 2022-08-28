@@ -185,3 +185,29 @@ Possible reasons for tests not running
 Possible reason for ImportError
 
 * Both `tests/` directory and `tests.py` exist.
+
+
+# Django authentication
+
+* Built in authentication system
+* Framework for basic features
+    * Registration
+    * Login
+    * Auth
+
+## Migrations erros
+
+```
+django.db.migrations.exceptions.InconsistentMigrationHistory: Migration admin.0001_initial is applied before its dependency core.0001_initial on database 'default'.
+```
+
+Delete o volume do container. E tente novamente.
+
+```
+docker-compose down
+docker volume rm recipe-app-api-drf-course-udemy_pgdata
+docker-compose up
+
+python manage.py migrate
+```
+
