@@ -82,3 +82,17 @@ Authenticate with Docker Hub
 
 On Github repository, click Settings > Secrets > Actions and click on **New repository secret**
 
+
+## Linting
+
+```
+docker-compose build
+docker-compose run --rm app sh -c "flake8"
+```
+
+## Testing
+
+```
+docker-compose run --rm app sh -c "python manage.py test"
+```
+
