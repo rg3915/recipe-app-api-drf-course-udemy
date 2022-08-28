@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     # my apps
     'core',
+    'user',
 ]
 
 AUTH_USER_MODEL = 'core.User'
