@@ -211,3 +211,15 @@ docker-compose up
 python manage.py migrate
 ```
 
+# Authentication
+
+## Types of authentication
+
+* Basic
+    * Send username and password with each request
+* Token
+    * Use a token in the HTTP header
+* JSON Web Token (JWT)
+    * Use an access and refresh token
+* Session
+    * Use cookies
