@@ -14,6 +14,7 @@ from core.models import Ingredient, Recipe, Tag
 from recipe.serializers import (
     IngredientSerializer,
     RecipeDetailSerializer,
+    RecipeImageSerializer,
     RecipeSerializer,
     TagSerializer
 )
@@ -74,8 +75,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
         '''
         if self.action == 'list':
             return RecipeSerializer
-        # elif self.action == 'upload_image':
-        #     return RecipeImageSerializer
+        elif self.action == 'upload_image':
+            return RecipeImageSerializer
 
         return self.serializer_class
 

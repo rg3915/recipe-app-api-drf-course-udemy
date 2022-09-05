@@ -7,12 +7,15 @@ from django.db import models
 
 from .managers import UserManager
 
-# def recipe_image_file_path(instance, filename):
-#     '''Generate file path for new recipe image.'''
-#     ext = os.path.splitext(filename)[1]
-#     filename = f'{uuid.uuid4()}{ext}'
 
-#     return os.path.join('uploads', 'recipe', filename)
+def recipe_image_file_path(instance, filename):
+    '''
+    Generate file path for new recipe image.
+    '''
+    ext = os.path.splitext(filename)[1]
+    filename = f'{uuid.uuid4()}{ext}'
+
+    return os.path.join('uploads', 'recipe', filename)
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -44,7 +47,7 @@ class Recipe(models.Model):
     link = models.CharField(max_length=255, blank=True)
     tags = models.ManyToManyField('Tag')
     ingredients = models.ManyToManyField('Ingredient')
-    # image = models.ImageField(null=True, upload_to=recipe_image_file_path)
+    image = models.ImageField(null=True, upload_to=recipe_image_file_path)
 
     def __str__(self):
         return self.title
