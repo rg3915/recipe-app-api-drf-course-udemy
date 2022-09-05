@@ -36,18 +36,24 @@ from recipe.serializers import (
     )
 )
 class RecipeViewSet(viewsets.ModelViewSet):
-    """View for manage recipe APIs."""
+    '''
+    View for manage recipe APIs.
+    '''
     serializer_class = RecipeDetailSerializer
     queryset = Recipe.objects.all()
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def _params_to_ints(self, qs):
-        """Convert a list of strings to integers."""
+        '''
+        Convert a list of strings to integers.
+        '''
         return [int(str_id) for str_id in qs.split(',')]
 
     def get_queryset(self):
-        """Retrieve recipes for authenticated user."""
+        '''
+        Retrieve recipes for authenticated user.
+        '''
         tags = self.request.query_params.get('tags')
         ingredients = self.request.query_params.get('ingredients')
         queryset = self.queryset
@@ -63,7 +69,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
         ).order_by('-id').distinct()
 
     def get_serializer_class(self):
-        """Return the serializer class for request."""
+        '''
+        Return the serializer class for request.
+        '''
         if self.action == 'list':
             return RecipeSerializer
         # elif self.action == 'upload_image':
@@ -72,12 +80,16 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return self.serializer_class
 
     def perform_create(self, serializer):
-        """Create a new recipe."""
+        '''
+        Create a new recipe.
+        '''
         serializer.save(user=self.request.user)
 
     @action(methods=['POST'], detail=True, url_path='upload-image')
     def upload_image(self, request, pk=None):
-        """Upload an image to recipe."""
+        '''
+        Upload an image to recipe.
+        '''
         recipe = self.get_object()
         serializer = self.get_serializer(recipe, data=request.data)
 
@@ -103,12 +115,16 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
                             mixins.UpdateModelMixin,
                             mixins.ListModelMixin,
                             viewsets.GenericViewSet):
-    """Base viewset for recipe attributes."""
+    '''
+    Base viewset for recipe attributes.
+    '''
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        """Filter queryset to authenticated user."""
+        '''
+        Filter queryset to authenticated user.
+        '''
         assigned_only = bool(
             int(self.request.query_params.get('assigned_only', 0))
         )
@@ -122,12 +138,16 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
 
 
 class TagViewSet(BaseRecipeAttrViewSet):
-    """Manage tags in the database."""
+    '''
+    Manage tags in the database.
+    '''
     serializer_class = TagSerializer
     queryset = Tag.objects.all()
 
 
 class IngredientViewSet(BaseRecipeAttrViewSet):
-    """Manage ingredients in the database."""
+    '''
+    Manage ingredients in the database.
+    '''
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
