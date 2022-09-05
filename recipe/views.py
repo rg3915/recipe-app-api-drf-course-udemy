@@ -10,8 +10,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from core.models import Recipe, Tag  # , Ingredient,
+from core.models import Ingredient, Recipe, Tag
 from recipe.serializers import (
+    IngredientSerializer,
     RecipeDetailSerializer,
     RecipeSerializer,
     TagSerializer
@@ -47,15 +48,15 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         """Retrieve recipes for authenticated user."""
-        # tags = self.request.query_params.get('tags')
-        # ingredients = self.request.query_params.get('ingredients')
+        tags = self.request.query_params.get('tags')
+        ingredients = self.request.query_params.get('ingredients')
         queryset = self.queryset
-        # if tags:
-        #     tag_ids = self._params_to_ints(tags)
-        #     queryset = queryset.filter(tags__id__in=tag_ids)
-        # if ingredients:
-        #     ingredient_ids = self._params_to_ints(ingredients)
-        #     queryset = queryset.filter(ingredients__id__in=ingredient_ids)
+        if tags:
+            tag_ids = self._params_to_ints(tags)
+            queryset = queryset.filter(tags__id__in=tag_ids)
+        if ingredients:
+            ingredient_ids = self._params_to_ints(ingredients)
+            queryset = queryset.filter(ingredients__id__in=ingredient_ids)
 
         return queryset.filter(
             user=self.request.user
@@ -126,7 +127,7 @@ class TagViewSet(BaseRecipeAttrViewSet):
     queryset = Tag.objects.all()
 
 
-# class IngredientViewSet(BaseRecipeAttrViewSet):
-#     """Manage ingredients in the database."""
-#     serializer_class = IngredientSerializer
-#     queryset = Ingredient.objects.all()
+class IngredientViewSet(BaseRecipeAttrViewSet):
+    """Manage ingredients in the database."""
+    serializer_class = IngredientSerializer
+    queryset = Ingredient.objects.all()
