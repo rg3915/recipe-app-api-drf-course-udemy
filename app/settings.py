@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # my apps
     'core',
     'user',
+    'recipe',
 ]
 
 AUTH_USER_MODEL = 'core.User'
