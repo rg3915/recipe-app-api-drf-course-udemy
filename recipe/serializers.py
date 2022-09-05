@@ -22,13 +22,13 @@ class TagSerializer(serializers.ModelSerializer):
 
 class RecipeSerializer(serializers.ModelSerializer):
     """Serializer for recipes."""
-    # tags = TagSerializer(many=True, required=False)
+    tags = TagSerializer(many=True, required=False)
     # ingredients = IngredientSerializer(many=True, required=False)
 
     class Meta:
         model = Recipe
-        fields = ['id', 'title', 'time_minutes', 'price', 'link']
-        # 'tags', 'ingredients',
+        fields = ['id', 'title', 'time_minutes', 'price', 'link', 'tags']
+        # , 'ingredients',
         read_only_fields = ('id',)
 
 
@@ -38,15 +38,15 @@ class RecipeDetailSerializer(RecipeSerializer):
     class Meta(RecipeSerializer.Meta):
         fields = RecipeSerializer.Meta.fields + ['description']
 
-    # def _get_or_create_tags(self, tags, recipe):
-    #     """Handle getting or creating tags as needed."""
-    #     auth_user = self.context['request'].user
-    #     for tag in tags:
-    #         tag_obj, created = Tag.objects.get_or_create(
-    #             user=auth_user,
-    #             **tag,
-    #         )
-    #         recipe.tags.add(tag_obj)
+    def _get_or_create_tags(self, tags, recipe):
+        """Handle getting or creating tags as needed."""
+        auth_user = self.context['request'].user
+        for tag in tags:
+            tag_obj, created = Tag.objects.get_or_create(
+                user=auth_user,
+                **tag,
+            )
+            recipe.tags.add(tag_obj)
 
     # def _get_or_create_ingredients(self, ingredients, recipe):
     #     """Handle getting or creating ingredients as needed."""
