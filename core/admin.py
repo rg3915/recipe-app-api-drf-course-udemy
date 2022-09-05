@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from core.models import Recipe, Tag, User
+from core.models import Recipe, Tag, User, Ingredient
 
 
 class UserAdmin(BaseUserAdmin):
@@ -48,4 +48,4 @@ class RecipeAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Tag)
-# admin.site.register(Ingredient)
+admin.site.register(Ingredient)
