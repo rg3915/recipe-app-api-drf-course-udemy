@@ -10,8 +10,12 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from core.models import Recipe  # Tag,; Ingredient,
-from recipe.serializers import RecipeDetailSerializer, RecipeSerializer
+from core.models import Recipe, Tag  # , Ingredient,
+from recipe.serializers import (
+    RecipeDetailSerializer,
+    RecipeSerializer,
+    TagSerializer
+)
 
 
 @extend_schema_view(
@@ -116,10 +120,10 @@ class BaseRecipeAttrViewSet(mixins.DestroyModelMixin,
         ).order_by('-name').distinct()
 
 
-# class TagViewSet(BaseRecipeAttrViewSet):
-#     """Manage tags in the database."""
-#     serializer_class = TagSerializer
-#     queryset = Tag.objects.all()
+class TagViewSet(BaseRecipeAttrViewSet):
+    """Manage tags in the database."""
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
 
 
 # class IngredientViewSet(BaseRecipeAttrViewSet):
