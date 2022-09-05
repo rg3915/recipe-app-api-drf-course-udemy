@@ -7,4 +7,4 @@ autopep8:
 isort:
 	isort -m 3 *
 
-lint: autopep8 isort indenter
+lint: autopep8 isort
